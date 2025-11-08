@@ -1,0 +1,34 @@
+---
+title: "EDLD 651: HW6"
+author: "Sara Kiros, Ohnmar Khine Min, Chen Su"
+format: pdf
+execute: 
+  eval: true
+  echo: false
+fig-width: 6.5
+fig-height: 8
+---
+
+
+```{r}
+#| label: load-packages
+#| warning: false
+
+library(tidyverse)
+library(here)
+library(rio)
+library(janitor)
+library(ggplot2)
+
+```
+
+
+```{r}
+#| label: load-data
+
+star <- import(here("data", "star.csv")) |>
+  as_tibble() |>
+  clean_names()
+
+```
+
