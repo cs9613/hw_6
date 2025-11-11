@@ -7,8 +7,9 @@ execute:
   echo: false
 fig-width: 6.5
 fig-height: 8
+bibliography: references.bib
+link-citations: true
 ---
-
 
 ```{r}
 #| label: load-packages
@@ -22,7 +23,6 @@ library(ggplot2)
 
 ```
 
-
 ```{r}
 #| label: load-data
 
@@ -32,3 +32,7 @@ star <- import(here("data", "star.csv")) |>
 
 ```
 
+We used [@R; @here; @tidyverse] to assist our coding. We referenced @DeAnda2025 for their brilliant work.
+
+\newpage
+# References 
