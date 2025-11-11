@@ -29,10 +29,54 @@ library(ggplot2)
 star <- import(here("data", "star.csv")) |>
   as_tibble() |>
   clean_names()
-
 ```
+
+
+```{r}
+# Commit 3: Table
+table <- star |> 
+  group_by(sex, frl) |> 
+  summarise(
+    math_mean = mean(tmathss, na.rm = TRUE), 
+    math_sd = sd(tmathss, na.rm = TRUE), 
+    rdg_mean = mean(treadss, na.rm = TRUE), 
+    rdg_sd = sd(treadss, na.rm = TRUE),
+    .groups = "drop")
+table
+```
+
+
+```{r}
+# Commit 4: Plot
+star <- star |> 
+  mutate(
+    frl = factor(frl, 
+                 levels = c("yes", "no"),
+                 labels = c("Free/Reduced Price Meals", "Paid Meals")
+                 )
+  )
+
+ggplot(star, aes(x = totexp, y = tmathss, color = frl)) + 
+  geom_point(alpha = 0.35, color = "grey", size = 1.2, show.legend = FALSE) + 
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1.2) + 
+  labs(
+    title = "Relation between teacher experience and math scores", 
+    subtitle = "Seperate regression lines displayed by free/reduced price lunch status",
+    x = "Teacher Experience (years)",
+    y = "Total Math Scale Score", 
+    color = "Lunch Status"
+  ) + 
+  theme_minimal(base_size = 12) + 
+  theme(
+    legend.position = "bottom", 
+    legend.box = "horizontal"
+  )
+```
+
 
 We used [@R; @here; @tidyverse] to assist our coding. We referenced @DeAnda2025 for their brilliant work.
 
 \newpage
 # References 
+
+
